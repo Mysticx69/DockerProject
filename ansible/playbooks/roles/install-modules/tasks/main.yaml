@@ -3,7 +3,9 @@
   ansible.builtin.apt:
     name:
       - ntp
-      - python
+      - python3-pip
+      - virutalvenv
+      - python3-setuptools
       - tcpdump
       - wget
       - openssl

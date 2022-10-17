@@ -1,5 +1,0 @@
-[node]
-172.31.28.45 ansible_user=ubuntu #Node1
-172.31.18.148 ansible_user=ubuntu #Node3
-172.31.30.132 ansible_user=ubuntu  #Node2
-

@@ -9,7 +9,7 @@ Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker com
 
 Dans le dossier ansible du projet se trouve le code nécessaire au déploiement.
 
-Ansible est installé sur une 4ème EC2 (VM04) possédant la clé SSH privée correspondant à la clé publique du lab présente sur nos 3 EC2 (VM01 - VM03)
+Ansible est installé sur une 4ème EC2 (VM04) et possède la clé SSH privée correspondant à la clé publique du lab présente sur nos 3 EC2 (VM01 - VM03) pour pouvoir les gérer.
 
 **Commande à executer à la racine du projet :**
 

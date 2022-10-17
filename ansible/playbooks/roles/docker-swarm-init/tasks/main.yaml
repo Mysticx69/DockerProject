@@ -16,11 +16,13 @@
 - name: Get the Manager join-token
   ansible.builtin.command: docker swarm join-token --quiet manager
   register: manager_token
-  changed_when: manager_token.rc != 0
+  changed_when: manager_token.rc == 5
+  failed_when: manager_token.rc != 0
   tags: swarm
 
 - name: Get the worker join-token
   ansible.builtin.command: docker swarm join-token --quiet worker
   register: worker_token
-  changed_when: worker_token.rc != 0
+  changed_when: manager_token.rc == 5
+  failed_when: worker_token.rc != 0
   tags: swarm

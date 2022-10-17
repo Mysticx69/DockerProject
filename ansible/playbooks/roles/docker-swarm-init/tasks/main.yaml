@@ -7,7 +7,8 @@
   tags: swarm
 
 - name: Initialize Docker Swarm
-  ansible.builtin.docker_swarm:
+  community.docker.docker_swarm module:
+    state: present
     default_addr_poll: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
   when: swarm_status.rc != 0
   run_once: true

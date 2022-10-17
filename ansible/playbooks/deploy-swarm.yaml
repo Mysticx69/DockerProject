@@ -1,5 +1,6 @@
 ---
 - name: Setup pre-requisites
+  become: yes
   hosts: all
   roles:
     - install-modules

@@ -6,7 +6,8 @@
       - ca-certificates
       - curl
       - software-properties-common
-    tags: docker
+    state: present
+  tags: docker
 
 
 - name: Get Docker key

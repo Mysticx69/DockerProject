@@ -1,0 +1,28 @@
+---
+- name: Install Docker Dependencies
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    tags: docker
+
+
+- name: Get Docker key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+  tags: docker
+
+
+- name: Add Docker Repository
+  ansible.builtin.apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Install Docker
+  ansible.builtin.apt:
+    name: docker-ce
+    state: present
+    update_cache: true

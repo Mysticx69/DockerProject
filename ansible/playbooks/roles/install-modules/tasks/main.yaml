@@ -1,0 +1,12 @@
+---
+- name: Install Packages
+  ansible.builtin.apt:
+    name:
+      - ntp
+      - python
+      - tcpdump
+      - wget
+      - openssl
+      - curl
+    state: present
+    update_cache: true

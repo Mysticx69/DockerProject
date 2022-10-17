@@ -5,7 +5,7 @@
      - name: Set up pre-requirements package
        apt:
         pkg:
-          - apt-transport-https
+          - ansible.builtin.apt-transport-https
           - ca-certificates
           - curl
           - software-properties-common
@@ -18,7 +18,7 @@
 
    
      - name: Add Docker's official GPG ley
-       apt_key:
+       ansible.builtin.apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present 
 

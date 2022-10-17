@@ -4,7 +4,7 @@
     name:
       - ntp
       - python3-pip
-      - virutalenv
+      - virutualenv
       - python3-setuptools
       - tcpdump
       - wget

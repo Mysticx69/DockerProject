@@ -1,24 +1,20 @@
 ---
 - name: Setup pre-requisites
-  become: yes
   hosts: all
   roles:
     - install-modules
 
 - name: Install docker
-  become: yes
   hosts: docker-nodes
   roles:
     - docker-installation
 
 - name: initialize docker swarm
-  become: yes
   hosts: swarm-manager
   roles:
     - docker-swarm-init
 
 - name: add workers to the swarm
-  become: yes
   hosts: swarm-workers
   roles:
-    - docker-swarm-add-worker
+    - docker-swarm-add-workersible 

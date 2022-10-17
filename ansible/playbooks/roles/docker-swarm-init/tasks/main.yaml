@@ -3,7 +3,6 @@
   ansible.builtin.command: docker node ls
   register: swarm_status
   ignore_errors: true
-  changed_when: swarm_status.rc != 0
   tags: swarm
 
 - name: Initialize Docker Swarm

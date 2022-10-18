@@ -24,3 +24,15 @@ output "public_route_table" {
 
 
 ### Multiple EC2 Module
+
+output "EC2_privateIP" {
+
+  value = module.Multiple_EC2.EC2_PrivateIP
+
+}
+
+output "EC2_name" {
+
+  value = module.Multiple_EC2.EC2_name
+
+}

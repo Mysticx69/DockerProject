@@ -15,14 +15,14 @@ module "Networking" {
 }
 
 
-# module "Multiple_EC2" {
+module "Multiple_EC2" {
 
-#   source        = "../modules/Multiple_EC2"
-#   ami           = "ami-08c40ec9ead489470"
-#   environment   = "DockerProjectCPE"
-#   instance_type = "t2.micro"
-#   EC2_counter   = 3
-#   subnet_id     = ""
+  source        = "../modules/Multiple_EC2"
+  ami           = "ami-08c40ec9ead489470"
+  environment   = "DockerProjectCPE"
+  instance_type = "t2.micro"
+  EC2_counter   = 3
+  subnet_id     = "subnet-0b63dc099426bd122"
 
 
-# }
+}

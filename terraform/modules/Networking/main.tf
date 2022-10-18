@@ -139,5 +139,6 @@ resource "aws_security_group" "default" {
 
   tags = {
     Environment = "${var.environment}"
+    Author      = "Antoine Sterna"
   }
 }

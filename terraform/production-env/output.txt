@@ -1,0 +1,34 @@
+EC2_name = [
+  [
+    tomap({
+      "Name" = "DockerProjectCPE-VM1"
+    }),
+    tomap({
+      "Name" = "DockerProjectCPE-VM2"
+    }),
+    tomap({
+      "Name" = "DockerProjectCPE-VM3"
+    }),
+  ],
+]
+EC2_privateIP = [
+  [
+    "10.150.1.149",
+    "10.150.1.88",
+    "10.150.1.107",
+  ],
+]
+private_subnets_id = [
+  [
+    "subnet-0ba577f03c7611dbc",
+    "subnet-0749b4aaff10d93d8",
+  ],
+]
+public_route_table = "rtb-0f585c1688db72044"
+public_subnets_id = [
+  [
+    "subnet-0b63dc099426bd122",
+    "subnet-0edf3471ccdca34ce",
+  ],
+]
+vpc_id = "vpc-0f041e8f458ff3733"

@@ -13,22 +13,23 @@ EC2_name = [
 ]
 EC2_privateIP = [
   [
-    "10.150.1.149",
-    "10.150.1.88",
-    "10.150.1.107",
+    "10.150.2.167",
+    "10.150.2.235",
+    "10.150.2.29",
   ],
 ]
+default_sg_id = "sg-00c2da31767df0916"
 private_subnets_id = [
   [
-    "subnet-0ba577f03c7611dbc",
-    "subnet-0749b4aaff10d93d8",
+    "subnet-0e2f07d93c6b065e9",
+    "subnet-092a5e65a0c1da198",
   ],
 ]
-public_route_table = "rtb-0f585c1688db72044"
+public_route_table = "rtb-00f9dd6cd8a5a4de7"
 public_subnets_id = [
   [
-    "subnet-0b63dc099426bd122",
-    "subnet-0edf3471ccdca34ce",
+    "subnet-0bde82f39aec9a895",
+    "subnet-00c3f437a68452377",
   ],
 ]
-vpc_id = "vpc-0f041e8f458ff3733"
+vpc_id = "vpc-018ec406641333fa4"

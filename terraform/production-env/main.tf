@@ -22,9 +22,10 @@ module "Multiple_EC2" {
   environment            = "DockerProjectCPE"
   instance_type          = "t2.micro"
   EC2_counter            = 3
-  subnet_id              = "subnet-0b63dc099426bd122"
+  subnet_id              = element(element(module.Networking.public_subnets_id, 1), 1)
   key_name               = "vockey"
-  vpc_security_group_ids = ["sg-04e6f6381e366f855"]
+  vpc_security_group_ids = ["${module.Networking.default_sg_id}"]
+
 
 }
 
@@ -33,10 +34,9 @@ resource "aws_instance" "Ansible" {
 
   ami                    = "ami-08c40ec9ead489470"
   instance_type          = "t2.micro"
-  subnet_id              = "subnet-0b63dc099426bd122"
+  subnet_id              = element(element(module.Networking.public_subnets_id, 1), 1)
   key_name               = "vockey"
-  vpc_security_group_ids = ["sg-04e6f6381e366f855"]
-
+  vpc_security_group_ids = ["${module.Networking.default_sg_id}"]
 
   tags = {
     Name = "Ansible"

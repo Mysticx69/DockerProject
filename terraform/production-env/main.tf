@@ -23,6 +23,6 @@ module "Multiple_EC2" {
   instance_type = "t2.micro"
   EC2_counter   = 3
   subnet_id     = "subnet-0b63dc099426bd122"
-
+  key_name      = "vockey"
 
 }

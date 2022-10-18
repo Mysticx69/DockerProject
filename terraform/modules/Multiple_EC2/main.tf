@@ -5,7 +5,7 @@ resource "aws_instance" "EC2" {
 
   ami                         = var.ami
   instance_type               = var.instance_type
-  key_name                    = "vockey"
+  key_name                    = var.key_name
   associate_public_ip_address = true
   subnet_id                   = var.subnet_id
 

@@ -34,3 +34,10 @@ variable "subnet_id" {
   default     = null
 }
 
+
+variable "key_name" {
+
+  type        = string
+  description = "Key_pair for EC2"
+
+}

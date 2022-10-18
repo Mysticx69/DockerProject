@@ -7,6 +7,8 @@ resource "aws_instance" "EC2" {
   instance_type               = var.instance_type
   key_name                    = "vockey"
   associate_public_ip_address = true
+  subnet_id                   = var.subnet_id
+
 
   tags = {
 

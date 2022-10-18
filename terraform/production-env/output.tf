@@ -22,6 +22,12 @@ output "public_route_table" {
 
 }
 
+output "default_sg_id" {
+
+  value = module.Networking.default_sg_id
+
+}
+
 
 ### Multiple EC2 Module
 

@@ -8,7 +8,10 @@ Les scripts terraform vont permettre de :
 1. Créer le réseau c'est à dire: Un VPC; des subnets publics et privés; une internet gateway ; une NAT gateway; un security group par défaut.
 2. Les 3 EC2 qui feront parties de notre cluster swarm.
 3. Obtenir les outputs des EC2 et des différents subnet qui seront utiles pour Ansible par la suite.
-   
+
+**Pour voir les ressources déployées du réseau ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Networkings (Readme autogénéré via terraform-docs)**
+
+**Pour voir les ressources EC2 deployées ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Multiple_EC2 (Readme autogénéré via terraform-docs)**
 ## 2. Ansible 
 Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker compose ansi que l'initialisation de docker swarm (managers + workers) sur notre flotte de serveurs. Ansible nous sera également utile pour joindre X workers à notre docker swarm en déployant le token sur toutes les machines nécessaires.
 

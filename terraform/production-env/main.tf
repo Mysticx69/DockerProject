@@ -26,3 +26,17 @@ module "Multiple_EC2" {
   key_name      = "vockey"
 
 }
+
+
+resource "aws_instance" "Ansible" {
+
+  ami           = "ami-08c40ec9ead489470"
+  instance_type = "t2.micro"
+  subnet_id     = "subnet-0b63dc099426bd122"
+  key_name      = "vockey"
+
+  tags = {
+    Name = "Ansible"
+  }
+
+}

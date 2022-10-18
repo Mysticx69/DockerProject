@@ -1,5 +1,15 @@
 # DockerProject
-## 1. Ansible 
+
+## 1. Terraform
+
+Pour ce projet, nous allons utiliser 3 serveurs en cluster sur AWS. Pour les déployer nous utilisions terraform.
+
+Les scripts terraform vont permettre de :
+1. Créer le réseau c'est à dire: Un VPC; des subnets publics et privés; une internet gateway ; une NAT gateway; un security group par défaut.
+2. Les 3 EC2 qui feront parties de notre cluster swarm.
+3. Obtenir les outputs des EC2 et des différents subnet qui seront utiles pour Ansible par la suite.
+   
+## 2. Ansible 
 Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker compose ansi que l'initialisation de docker swarm (managers + workers) sur notre flotte de serveurs. Ansible nous sera également utile pour joindre X workers à notre docker swarm en déployant le token sur toutes les machines nécessaires.
 
 ### IP des membres du cluster de serveurs (AWS EC2): 

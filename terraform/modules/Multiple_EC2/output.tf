@@ -10,4 +10,7 @@ output "EC2_name" {
 
 }
 
+output "test" {
 
+  value = aws_instance.EC2.ami
+}

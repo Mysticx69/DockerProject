@@ -25,12 +25,6 @@ variable "public_subnets_cidr" {
 
 }
 
-variable "region" {
-
-  type        = string
-  description = "Region in which EC2 will be launched"
-
-}
 
 
 

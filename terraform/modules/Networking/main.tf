@@ -33,7 +33,7 @@ resource "aws_nat_gateway" "nat" {
 
   tags = {
     Name        = "nat"
-    Environment = "${var.environment}"
+    Environment = var.environment
   }
 }
 
@@ -47,7 +47,7 @@ resource "aws_subnet" "public_subnet" {
 
   tags = {
     Name        = "${var.environment}-${element(var.availability_zones, count.index)}-public-subnet"
-    Environment = "${var.environment}"
+    Environment = var.environment
   }
 }
 
@@ -62,7 +62,7 @@ resource "aws_subnet" "private_subnet" {
 
   tags = {
     Name        = "${var.environment}-${element(var.availability_zones, count.index)}-private-subnet"
-    Environment = "${var.environment}"
+    Environment = var.environment
   }
 }
 
@@ -73,7 +73,7 @@ resource "aws_route_table" "private" {
 
   tags = {
     Name        = "${var.environment}-private-route-table"
-    Environment = "${var.environment}"
+    Environment = var.environment
   }
 }
 
@@ -83,7 +83,7 @@ resource "aws_route_table" "public" {
 
   tags = {
     Name        = "${var.environment}-public-route-table"
-    Environment = "${var.environment}"
+    Environment = var.environment
   }
 }
 
@@ -138,7 +138,7 @@ resource "aws_security_group" "default" {
   }
 
   tags = {
-    Environment = "${var.environment}"
+    Environment = var.environment
     Author      = "Antoine Sterna"
   }
 }
@@ -169,7 +169,7 @@ resource "aws_security_group" "allow_all" {
   tags = {
 
     Name        = "allow_ALL"
-    Environment = "${var.environment}"
+    Environment = var.environment
     Author      = "Antoine Sterna"
 
 

@@ -1,13 +1,16 @@
-<!-- BEGIN_TF_DOCS -->
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
-No requirements.
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | 1.3.3 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~>2.8 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~>2.8 |
 
 ## Modules
 
@@ -38,4 +41,4 @@ No modules.
 |------|-------------|
 | <a name="output_EC2_PrivateIP"></a> [EC2\_PrivateIP](#output\_EC2\_PrivateIP) | n/a |
 | <a name="output_EC2_name"></a> [EC2\_name](#output\_EC2\_name) | n/a |
-<!-- END_TF_DOCS -->
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

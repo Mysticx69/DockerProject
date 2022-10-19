@@ -24,7 +24,7 @@ module "Multiple_EC2" {
   EC2_counter            = 3
   subnet_id              = element(element(module.Networking.public_subnets_id, 1), 1)
   key_name               = "vockey"
-  vpc_security_group_ids = ["${module.Networking.allow_all_sg_id}"]
+  vpc_security_group_ids = [module.Networking.allow_all_sg_id]
 
 
 }
@@ -32,11 +32,13 @@ module "Multiple_EC2" {
 
 resource "aws_instance" "Dev_Tools" {
 
-  ami                    = "ami-08c40ec9ead489470"
-  instance_type          = "t2.micro"
-  subnet_id              = element(element(module.Networking.public_subnets_id, 1), 1)
-  key_name               = "vockey"
-  vpc_security_group_ids = ["${module.Networking.allow_all_sg_id}"]
+  ami                         = "ami-08c40ec9ead489470"
+  instance_type               = "t2.micro"
+  subnet_id                   = element(element(module.Networking.public_subnets_id, 1), 1)
+  key_name                    = "vockey"
+  vpc_security_group_ids      = [module.Networking.allow_all_sg_id]
+  associate_public_ip_address = true
+
 
   tags = {
     Name = "Dev_Tools"

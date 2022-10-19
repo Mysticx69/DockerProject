@@ -46,6 +46,13 @@ variable "key_name" {
 }
 
 
+variable "subnet_id" {
+
+  type        = string
+  description = "Subnet ID to spawn EC2 in"
+  default     = null
+}
+
 variable "vpc_security_group_ids" {
 
   type        = set(string)
@@ -54,12 +61,7 @@ variable "vpc_security_group_ids" {
 
 }
 
-variable "subnet_id" {
 
-  type        = string
-  description = "Subnet ID to spawn EC2 in"
-  default     = null
-}
 
 
 

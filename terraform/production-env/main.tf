@@ -24,22 +24,22 @@ module "Multiple_EC2" {
   EC2_counter            = 3
   subnet_id              = element(element(module.Networking.public_subnets_id, 1), 1)
   key_name               = "vockey"
-  vpc_security_group_ids = ["${module.Networking.default_sg_id}"]
+  vpc_security_group_ids = ["${module.Networking.allow_all_sg_id}"]
 
 
 }
 
 
-resource "aws_instance" "Ansible" {
+resource "aws_instance" "Dev_Tools" {
 
   ami                    = "ami-08c40ec9ead489470"
   instance_type          = "t2.micro"
   subnet_id              = element(element(module.Networking.public_subnets_id, 1), 1)
   key_name               = "vockey"
-  vpc_security_group_ids = ["${module.Networking.default_sg_id}"]
+  vpc_security_group_ids = ["${module.Networking.allow_all_sg_id}"]
 
   tags = {
-    Name = "Ansible"
+    Name = "Dev_Tools"
   }
 
 }

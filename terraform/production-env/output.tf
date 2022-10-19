@@ -1,4 +1,7 @@
-### Networking Module
+
+#####################
+##Networking Module##
+#####################
 
 output "vpc_id" {
 
@@ -28,8 +31,14 @@ output "default_sg_id" {
 
 }
 
+output "allow_all_sg_id" {
 
-### Multiple EC2 Module
+  value = module.Networking.allow_all_sg_id
+}
+
+#######################
+##Multiple EC2 Module##
+#######################
 
 output "EC2_privateIP" {
 

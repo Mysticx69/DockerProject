@@ -15,8 +15,8 @@ output "default_sg_id" {
   value = aws_security_group.default.id
 }
 
-output "security_groups_ids" {
-  value = ["${aws_security_group.default.id}"]
+output "allow_all_sg_id" {
+  value = aws_security_group.allow_all.id
 }
 
 output "public_route_table" {

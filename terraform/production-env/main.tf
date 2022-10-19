@@ -38,7 +38,7 @@ resource "aws_instance" "Dev_Tools" {
   key_name                    = "vockey"
   vpc_security_group_ids      = [module.Networking.allow_all_sg_id]
   associate_public_ip_address = true
-
+  user_data                   = file("./scripts/user-data_installAnsible.sh")
 
   tags = {
     Name = "Dev_Tools"

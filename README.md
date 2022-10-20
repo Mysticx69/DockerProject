@@ -31,18 +31,19 @@ Les scripts terraform vont permettre de :
 Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker compose ansi que l'initialisation de docker swarm (managers + workers) sur notre flotte de serveurs. Ansible nous sera également utile pour joindre X workers à notre docker swarm en déployant le token sur toutes les machines nécessaires.
 
 ### IP des membres du cluster de serveurs (AWS EC2):
- - VM01 (MANAGER) => @IP privé : 10.150.1.1
- - VM02 (WORKER)  => @IP privé : 10.150.1.2
- - VM03 (WORKER)  => @IP privé : 10.150.1.3
- - VM04 (WORKER)  => @IP privé : 10.150.1.4
+ - VM01 (MANAGER) => @IP privé : 10.150.2.10
+ - VM02 (WORKER)  => @IP privé : 10.150.2.11
+ - VM03 (WORKER)  => @IP privé : 10.150.2.12
+ - VM04 (WORKER)  => @IP privé : 10.150.2.13
 
 Dans le dossier ansible du projet se trouve le code nécessaire au déploiement.
 
 Ansible est installé sur une autre EC2 (Dev_Tools) et possède la clé SSH privée correspondant à la clé publique du lab présente sur nos 4 EC2 (VM01 - VM04) pour pouvoir les gérer.
 
-Pour simplifier, nous avons peuplé le fichier /etc/hosts sur la machine Ansible de cette façon:
+Pour simplifier, nous avons peuplé le fichier /etc/hosts sur la machine dev_tools qui héberge Ansible de cette façon:
 
-![test](https://user-images.githubusercontent.com/84475677/196258723-4c4aa76f-c4c1-4fc7-bb18-609e07825713.PNG)
+![Fichier_hosts](https://user-images.githubusercontent.com/84475677/197055826-5b02dd9a-9607-4675-bbbb-91bd34cd0a37.png)
+
 
 Les noms attribués seront  utilisés dans l'inventory d'ansible
 

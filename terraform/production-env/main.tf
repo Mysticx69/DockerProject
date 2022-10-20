@@ -49,7 +49,7 @@ resource "aws_instance" "Dev_Tools" {
 
 }
 
-resource "aws_eip" "lb" {
+resource "aws_eip" "Dev_tools_EIP" {
 
   instance = aws_instance.Dev_Tools.id
   vpc      = true

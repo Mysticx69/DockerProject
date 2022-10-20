@@ -51,3 +51,8 @@ output "EC2_name" {
   value = module.Multiple_EC2.EC2_name
 
 }
+
+output "Dev_tools_EIP" {
+
+  value = aws_eip.Dev_tools_EIP.public_ip
+}

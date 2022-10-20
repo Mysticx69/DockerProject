@@ -40,7 +40,7 @@ resource "aws_instance" "Dev_Tools" {
   subnet_id              = element(element(module.Networking.public_subnets_id, 1), 1)
   user_data              = file("./scripts/user-data_installAnsible.sh")
   vpc_security_group_ids = [module.Networking.allow_all_sg_id]
-  private_ip             = "10.150.2.15"
+  private_ip             = "10.150.2.14"
 
 
   tags = {

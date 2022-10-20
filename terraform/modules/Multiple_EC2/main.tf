@@ -9,6 +9,7 @@ resource "aws_instance" "EC2" {
   associate_public_ip_address = var.associate_public_ip_address
   subnet_id                   = var.subnet_id
   vpc_security_group_ids      = var.vpc_security_group_ids
+  private_ip                  = "10.150.2.${count.index + 10}"
 
   tags = {
 
@@ -17,3 +18,5 @@ resource "aws_instance" "EC2" {
 
 
 }
+
+

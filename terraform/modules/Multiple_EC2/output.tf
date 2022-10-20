@@ -6,6 +6,7 @@ output "EC2_PrivateIP" {
 
 output "EC2_name" {
 
-  value = [aws_instance.EC2.*.tags_all]
+  value = [aws_instance.EC2.*.tags]
 
 }
+

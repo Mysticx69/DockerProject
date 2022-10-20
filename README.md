@@ -15,13 +15,13 @@ Les scripts terraform vont permettre de :
 1. **Créer le réseau, c'est à dire:**
   - Un VPC
   - Des subnets publics et privés attachés à ce VPC
-  - Une internet gateway pour connecter le VPC à internet et aux services  AWS  
+  - Une internet gateway pour connecter le VPC à internet et aux services  AWS
   - Une NAT gateway pour permettre au réseau privé de sortir sur internet
   - Des security groups adaptés aux flux qui transitent.
 2. **Les 4 EC2 qui feront partis de notre cluster swarm.**
-   
+
 3. Obtenir les outputs des EC2 et des différents subnet qui seront utiles pour Ansible par la suite. Notamment pour les playbooks.
-    
+
 4. Une fois le réseau et les EC2 déployés, le playbook ansible (voir ci après) va se lancer automatiquement à la création, grâce au user-data
 
 **Pour voir les ressources déployées du réseau ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Networkings (Readme autogénéré via terraform-docs)**

@@ -46,6 +46,7 @@ variable "key_name" {
 }
 
 
+
 variable "subnet_id" {
 
   type        = string
@@ -60,3 +61,5 @@ variable "vpc_security_group_ids" {
   default     = null
 
 }
+
+

@@ -29,10 +29,10 @@ Les scripts terraform vont permettre de :
 Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker compose ansi que l'initialisation de docker swarm (managers + workers) sur notre flotte de serveurs. Ansible nous sera également utile pour joindre X workers à notre docker swarm en déployant le token sur toutes les machines nécessaires.
 
 ### IP des membres du cluster de serveurs (AWS EC2):
- - VM01 (MANAGER) => @IP privé : 10.150.1.1
- - VM02 (WORKER)  => @IP privé : 10.150.1.2
- - VM03 (WORKER)  => @IP privé : 10.150.1.3
- - VM04 (WORKER)  => @IP privé : 10.150.1.4
+ - VM01 (MANAGER) => @IP privé : <span style="color:red">10.150.1.1</span>.
+ - VM02 (WORKER)  => @IP privé : <span style="color:red">10.150.1.1</span>.
+ - VM03 (WORKER)  => @IP privé : <span style="color:red">10.150.1.1</span>.
+ - VM04 (WORKER)  => @IP privé : <span style="color:red">10.150.1.1</span>.
 
 Dans le dossier ansible du projet se trouve le code nécessaire au déploiement.
 

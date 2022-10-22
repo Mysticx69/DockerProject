@@ -24,7 +24,7 @@ Les scripts terraform vont permettre de :
 
 4. Une fois le réseau et les EC2 déployés, le playbook ansible (voir ci après) va se lancer automatiquement à la création, grâce au user-data
 
-### Architecture 
+### Architecture code terraform
 ``` bash
 .
 |-- modules
@@ -85,7 +85,7 @@ Les noms attribués seront  utilisés dans l'inventory d'ansible
 
 Le code source Ansible se trouve dans le dossier Ansible.
 
-### Architecture
+### Architecture code ansible
 ```bash
 .
 |-- ansible.cfg

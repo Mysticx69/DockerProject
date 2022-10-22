@@ -111,9 +111,8 @@ resource "aws_instance" "Dev_Tools" {
 
 resource "aws_eip" "Dev_tools_EIP" {
 
-  instance   = aws_instance.Dev_Tools.id
-  vpc        = true
-  depends_on = [aws_instance.Dev_Tools.id]
+  instance = aws_instance.Dev_Tools.id
+  vpc      = true
 
   tags = {
     "Name" = "EIP for dev_tools instance"

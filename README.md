@@ -82,7 +82,7 @@ Pour simplifier, nous avons peuplé le fichier /etc/hosts sur la machine dev_too
 
 Les noms attribués seront  utilisés dans l'inventory d'ansible
 
-<<<<<<< HEAD
+
 Le code source Ansible se trouve dans le dossier Ansible.
 
 ### Architecture
@@ -130,7 +130,6 @@ Le code source Ansible se trouve dans le dossier Ansible.
 Nous utilisons python pour deux choses :
 1. Pour fetch l'API du grand lyon est obtenir un jeu de données en json (des velov de Lyon) puis pour publish à notre broker Mosquitto
 2. Pour subscribe à notre broker Mosquitto et parser le jeu de donnée selon ce que l'on souhaite garder + la mise en forme que l'on souhaite et pour finir : Envoyer ces données à notre BDD influxDB sur lequel un grafana sera greffé
-=======
-**À ce stade là et en une seule commande, l'infrastructure réseau ainsi que tous les serveurs sont déployés et sont en cluster swarm.**
 
->>>>>>> 8b041b6dd7ea94f2348b7b5fa345bac3aeb8631d
+
+

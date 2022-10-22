@@ -12,3 +12,8 @@
       - curl
     state: present
     update_cache: true
+
+- name: Install PIP Packages
+  ansible.builtin.pip:
+    name:
+      - docker

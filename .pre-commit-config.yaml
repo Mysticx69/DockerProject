@@ -12,3 +12,8 @@ repos:
       - id: trailing-whitespace
       - id: check-added-large-files
       - id: detect-aws-credentials
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v6.8.2
+    hooks:
+      - id: ansible-lint
+        files: \.(yaml|yml)$

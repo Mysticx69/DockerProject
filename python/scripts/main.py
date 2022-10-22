@@ -8,7 +8,7 @@
 from fetch import fetch_api
 from parse import parse_data
 
-URL = "https://download.data.grandlyon.com/ws/rdata/jcd_jcdecaux.jcdvelov/all.json?maxfeatures=5&start=1"
+URL = "https://download.data.grandlyon.com/ws/rdata/jcd_jcdecaux.jcdvelov/all.json?maxfeatures=10&start=1"
 
 
 def main() -> None:

@@ -24,6 +24,33 @@ Les scripts terraform vont permettre de :
 
 4. Une fois le réseau et les EC2 déployés, le playbook ansible (voir ci après) va se lancer automatiquement à la création, grâce au user-data
 
+### Architecture 
+``` bash
+.
+|-- modules
+|   |-- Multiple_EC2
+|   |   |-- README.md
+|   |   |-- main.tf
+|   |   |-- output.tf
+|   |   |-- provider.tf
+|   |   `-- variables.tf
+|   `-- Networking
+|       |-- README.md
+|       |-- main.tf
+|       |-- output.tf
+|       |-- provider.tf
+|       `-- variables.tf
+`-- production-env
+    |-- backend.tf
+    |-- main.tf
+    |-- output.tf
+    |-- output.txt
+    |-- provider.tf
+    `-- scripts
+        `-- Ansible.sh
+
+5 directories, 16 files 
+```
 
 
 **Pour voir les ressources déployées du réseau ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Networkings (Readme autogénéré via terraform-docs)**
@@ -55,5 +82,50 @@ Pour simplifier, nous avons peuplé le fichier /etc/hosts sur la machine dev_too
 
 Les noms attribués seront  utilisés dans l'inventory d'ansible
 
-**À ce stade là et en une seule commande, l'infrastructure réseau ainsi que tous les serveurs sont déployés et en cluster swarm.**
+Le code source Ansible se trouve dans le dossier Ansible.
 
+### Architecture
+```bash
+.
+|-- ansible.cfg
+|-- inventories
+|   `-- production
+|       |-- group_vars
+|       |   |-- all
+|       |   |   `-- all.yml
+|       |   |-- docker-nodes
+|       |   |   `-- all.yml
+|       |   |-- swarm-managers
+|       |   |   `-- all.yml
+|       |   `-- swarm-workers
+|       |       `-- all.yaml
+|       `-- hosts
+`-- playbooks
+    |-- delete-swarm.yaml
+    |-- deploy-swarm.yaml
+    `-- roles
+        |-- docker-installation
+        |   `-- tasks
+        |       `-- main.yaml
+        |-- docker-swarm-add-worker
+        |   `-- tasks
+        |       `-- main.yaml
+        |-- docker-swarm-init
+        |   `-- tasks
+        |       `-- main.yaml
+        |-- docker-swarm-leave
+        |   `-- main.yaml
+        `-- install-modules
+            `-- tasks
+                `-- main.yaml
+
+18 directories, 13 files
+```
+
+**À ce stade là et en une seule commande, l'infrastructure réseau ainsi que tous les serveurs sont déployés et sont en cluster swarm.**
+
+## 3. Python 
+
+Nous utilisons python pour deux choses :
+1. Pour fetch l'API du grand lyon est obtenir un jeu de données en json (des velov de Lyon) puis pour publish à notre broker Mosquitto
+2. Pour subscribe à notre broker Mosquitto et parser le jeu de donnée selon ce que l'on souhaite garder + la mise en forme que l'on souhaite et pour finir : Envoyer ces données à notre BDD influxDB sur lequel un grafana sera greffé

@@ -115,7 +115,7 @@ resource "aws_eip" "Dev_tools_EIP" {
   vpc      = true
 
   tags = {
-    "Name" = "EIP for dev_tools instance"
+    "Name" = "EIP_Dev_Tools"
   }
 
 }

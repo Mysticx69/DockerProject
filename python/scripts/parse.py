@@ -2,7 +2,8 @@
 Parse data 
 @author: asterna
 """
-import json
+
+from fetch import fetch_api
 
 
 def parse_data(data_json):
@@ -15,7 +16,4 @@ def parse_data(data_json):
         capacite_totale = item.get('bike_stands')
         velo_dispo = item.get('available_bikes')
 
-        with open(data_json, 'r', encoding="utf8") as file:
-            data = json.load(file)
-
-        return data
+        print(addr)

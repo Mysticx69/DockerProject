@@ -6,7 +6,9 @@ Parse data
 
 def parse_data(data_json):
     """Parsing data for dockerproject"""
-    print("Nos item : \n")
+
+    json_payload = []
+    print("Nos items : \n")
     for item in data_json.get('values'):
 
         addr = (item.get('address'))
@@ -17,6 +19,7 @@ def parse_data(data_json):
         new_json = (f' {{ \n Addresse : {addr} \n  \
                 Commune : {commune} \n \
                 capacite : {capacite_totale} \n \
-                velo dispo {velo_dispo}  \n }},  ')
+                velo dispo {velo_dispo} \n }}, \n  ')
 
         print(new_json)
+        json_payload.append(data_json)

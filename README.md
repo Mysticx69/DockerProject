@@ -24,6 +24,8 @@ Les scripts terraform vont permettre de :
 
 4. Une fois le réseau et les EC2 déployés, le playbook ansible (voir ci après) va se lancer automatiquement à la création, grâce au user-data
 
+
+
 **Pour voir les ressources déployées du réseau ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Networkings (Readme autogénéré via terraform-docs)**
 
 **Pour voir les ressources EC2 deployées ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Multiple_EC2 (Readme autogénéré via terraform-docs)**
@@ -31,15 +33,15 @@ Les scripts terraform vont permettre de :
 Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker compose ansi que l'initialisation de docker swarm (managers + workers) sur notre flotte de serveurs. Ansible nous sera également utile pour joindre X workers à notre docker swarm en déployant le token sur toutes les machines nécessaires.
 
 ### IP des membres du cluster de serveurs (AWS EC2):
- - VM01 (MANAGER) => @IP privé : 10.150.2.10
- - VM02 (WORKER)  => @IP privé : 10.150.2.11
- - VM03 (WORKER)  => @IP privé : 10.150.2.12
- - VM04 (WORKER)  => @IP privé : 10.150.2.13
+ - VM01 (MANAGER) => @IP privé : `10.150.2.10`
+ - VM02 (WORKER)  => @IP privé : `10.150.2.11`
+ - VM03 (WORKER)  => @IP privé : `10.150.2.12`
+ - VM04 (WORKER)  => @IP privé : `10.150.2.13`
 
 ### IP des autres serveurs (AWS EC2):
-- Dev_Tools => @ip privé: 10.150.2.14 ; @ip public : 52.86.150.152
+- Dev_Tools => @ip privé: `10.150.2.14` ; @ip public : `52.86.150.152`
   - Dev_Tools a une EIP pour plus de facilité 
-- NAS =>  @ip privé: 10.150.2.15
+- NAS =>  @ip privé: `10.150.2.15`
 
 
 Dans le dossier ansible du projet se trouve le code nécessaire au déploiement.
@@ -52,4 +54,6 @@ Pour simplifier, nous avons peuplé le fichier /etc/hosts sur la machine dev_too
 
 
 Les noms attribués seront  utilisés dans l'inventory d'ansible
+
+**À ce stade là et en une seule commande, l'infrastructure réseau ainsi que tous les serveurs sont déployés et en cluster swarm.**
 

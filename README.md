@@ -36,6 +36,12 @@ Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker com
  - VM03 (WORKER)  => @IP privé : 10.150.2.12
  - VM04 (WORKER)  => @IP privé : 10.150.2.13
 
+### IP des autres serveurs (AWS EC2):
+- Dev_Tools => @ip privé: 10.150.2.14 ; @ip public : 52.86.150.152
+  - Dev_Tools a une EIP pour plus de facilité 
+- NAS =>  @ip privé: 10.150.2.15
+
+
 Dans le dossier ansible du projet se trouve le code nécessaire au déploiement.
 
 Ansible est installé sur une autre EC2 (Dev_Tools) et possède la clé SSH privée correspondant à la clé publique du lab présente sur nos 4 EC2 (VM01 - VM04) pour pouvoir les gérer.

@@ -8,15 +8,15 @@
 from fetch import fetch_api
 from parse import parse_data
 
-URL = "https://download.data.grandlyon.com/ws/rdata/jcd_jcdecaux.jcdvelov/all.json?maxfeatures=10&start=1"
+URL = "https://download.data.grandlyon.com/ws/rdata/jcd_jcdecaux.jcdvelov/all.json?maxfeatures=5&start=1"
 
 
 def main() -> None:
     """Main function"""
     # Fetch API and get JSON response
     data_fetched = fetch_api(URL)
-    print("Data fetched successfully...")
-    parse_data(data_fetched)
+
+    print(parse_data(data_fetched))
 
 
 if __name__ == "__main__":

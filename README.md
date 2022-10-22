@@ -55,5 +55,5 @@ Pour simplifier, nous avons peuplé le fichier /etc/hosts sur la machine dev_too
 
 Les noms attribués seront  utilisés dans l'inventory d'ansible
 
-**À ce stade là et en une seule commande, l'infrastructure réseau ainsi que tous les serveurs sont déployés et en cluster swarm.**
+**À ce stade là et en une seule commande, l'infrastructure réseau ainsi que tous les serveurs sont déployés et sont en cluster swarm.**
 

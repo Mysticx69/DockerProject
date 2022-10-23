@@ -1,7 +1,9 @@
 """
 Parse data
-@author: asterna
+@author: asterna, tblanchefort
 """
+
+from datetime import datetime
 
 
 def parse_data(data_json):
@@ -10,15 +12,23 @@ def parse_data(data_json):
     json_payload = []
 
     for item in data_json.get('values'):
-
+        velov = "VeloV"
         addr = (item.get('address'))
         commune = item.get('commune')
         capacite_totale = item.get('bike_stands')
         velo_dispo = item.get('available_bikes')
 
-        json_payload = (f' {{ \n Addresse : {addr} \n  \
-                Commune : {commune} \n \
-                capacite : {capacite_totale} \n \
-                velo dispo {velo_dispo} \n }}, \n  ')
-
-        print(json_payload)
+        data = {
+            "measurement": velov,
+            "tags": {
+                "Adresse": addr,
+                "Commune": commune,
+                "Capacite": capacite_totale
+            },
+            "time": datetime.now(),
+            "fields": {
+                "Velo dispo": velo_dispo
+            }
+        }
+        json_payload.append(data)
+    return json_payload

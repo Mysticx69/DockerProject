@@ -20,7 +20,7 @@ PORT = 1883
 KEEPALIVE = 60
 DATA = parse_data(MESSAGE)
 TOPIC = '/data'
-client = mqtt.Client()
+client = mqtt.Client("mqtt_pub")
 client.connect(BROKERIP, PORT, KEEPALIVE)
 for item in DATA:
     item_dumps = json.dumps(item)

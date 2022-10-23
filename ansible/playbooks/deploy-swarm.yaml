@@ -9,12 +9,12 @@
   roles:
     - docker-installation
 
-- name: initialize docker swarm
+- name: Initialize docker swarm
   hosts: swarm-manager
   roles:
     - docker-swarm-init
 
-- name: add workers to the swarm
+- name: Add workers to the swarm
   hosts: swarm-workers
   roles:
     - docker-swarm-add-worker

@@ -6,21 +6,26 @@ Client 1 publish to MQTT broker
 #simulator device 1 for mqtt message publishing
 
 import time
+import json
 import paho.mqtt.client as mqtt
+from fetch import fetch_api
+from parse import parse_data
 
-BROKERIP = '172.17.0.1'
+MESSAGE = fetch_api(
+    url=
+    "https://download.data.grandlyon.com/ws/rdata/jcd_jcdecaux.jcdvelov/all.json?maxfeatures=10&start=1"
+)
+BROKERIP = '10.150.2.10'
 PORT = 1883
 KEEPALIVE = 60
-TOPIC = 'API'
+DATA = parse_data(MESSAGE)
+TOPIC = '/data'
 client = mqtt.Client()
 client.connect(BROKERIP, PORT, KEEPALIVE)
-i = 0
-while True:
-    time.sleep(5)
-    i += 1
-    MESSAGE = str(i)
-    if i <= 10:
-        client.publish(TOPIC, MESSAGE)
-    else:
-        break
-client.disconnect()
+for item in DATA:
+    item_dumps = json.dumps(item)
+    print(item_dumps)
+    time.sleep(1)
+    client.publish(TOPIC, item_dumps)
+
+client.loop_forever()  # Start networking daemon

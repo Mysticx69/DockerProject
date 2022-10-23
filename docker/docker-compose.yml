@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  brokerMQTT:
+    image: eclipse-mosquitto:latest
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - mosquitto:/mydata
+      - ./mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mosquitto/log/mosquitto.log:/mosquitto/log/mosquitto.log
+    deploy:
+      placement:
+        constraints:
+          - "node.role==manager"
+      restart_policy:
+        condition: on-failure
+
+  publishMQTT:
+    image: 127.0.0.1:5000/publishmqtt:latest
+    depends_on:
+      - brokerMQTT
+    deploy:
+      placement:
+        constraints:
+          - "node.role==worker"
+
+  subscribeMQTT:
+    image: 127.0.0.1:5000/subscribemqtt:latest
+    depends_on:
+      - publishMQTT
+    deploy:
+      placement:
+        constraints:
+          - "node.role==worker"
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "9090:8080"
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints:
+          - "node.role==manager"
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  mosquitto:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.150.2.15,nolock,rw,soft"
+      device: ":/mosquitto"

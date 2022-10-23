@@ -7,8 +7,8 @@ name = "pypi"
 pylint = "*"
 yapf = "*"
 requests = "*"
-influxdb-client = "*"
 paho-mqtt = "*"
+influxdb-client = "*"
 
 [dev-packages]
 

@@ -9,13 +9,11 @@
     state: present
   tags: docker
 
-
 - name: Get Docker key
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
   tags: docker
-
 
 - name: Add Docker Repository
   ansible.builtin.apt_repository:
@@ -25,5 +23,11 @@
 - name: Install Docker
   ansible.builtin.apt:
     name: docker-ce
+    state: present
+    update_cache: true
+
+- name: Install Docker Compose
+  ansible.builtin.apt:
+    name: docker-compose
     state: present
     update_cache: true

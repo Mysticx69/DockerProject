@@ -49,7 +49,7 @@ Les scripts terraform vont permettre de :
     `-- scripts
         `-- Ansible.sh
 
-5 directories, 16 files 
+5 directories, 16 files
 ```
 
 
@@ -67,7 +67,7 @@ Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker com
 
 ### IP des autres serveurs (AWS EC2):
 - Dev_Tools => @ip privé: `10.150.2.14` ; @ip public : `52.86.150.152`
-  - Dev_Tools a une EIP pour plus de facilité 
+  - Dev_Tools a une EIP pour plus de facilité
 - NAS =>  @ip privé: `10.150.2.15`
 
 
@@ -125,7 +125,7 @@ Le code source Ansible se trouve dans le dossier Ansible.
 
 **À ce stade là et en une seule commande, l'infrastructure réseau ainsi que tous les serveurs sont déployés et sont en cluster swarm.**
 
-## 3. Python 
+## 3. Python
 
 Nous utilisons python pour deux choses :
 1. Pour fetch l'API du grand lyon est obtenir un jeu de données en json (des velov de Lyon) puis pour publish à notre broker Mosquitto

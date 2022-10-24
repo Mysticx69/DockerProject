@@ -1,21 +1,27 @@
-# DockerProject
+# 1. DockerProject
 
-- [DockerProject](#dockerproject)
-  - [1. Terraform](#1-terraform)
-    - [Architecture code terraform](#architecture-code-terraform)
-  - [2. Ansible](#2-ansible)
-    - [IP des membres du cluster de serveurs (AWS EC2):](#ip-des-membres-du-cluster-de-serveurs-aws-ec2)
-    - [IP des autres serveurs (AWS EC2):](#ip-des-autres-serveurs-aws-ec2)
-    - [Architecture code ansible](#architecture-code-ansible)
-  - [3. Python](#3-python)
-    - [Architecture](#architecture)
-  - [4. Docker](#4-docker)
-    - [Architecture](#architecture-1)
-    - [Annexe](#annexe)
+- [1. DockerProject](#1-dockerproject)
+  - [1.1. Terraform](#11-terraform)
+    - [1.1.1. Ressources déployées](#111-ressources-déployées)
+    - [1.1.2. Architecture code terraform](#112-architecture-code-terraform)
+    - [1.1.3. Fonctionnement](#113-fonctionnement)
+      - [1.1.3.1. Les modules](#1131-les-modules)
+    - [1.1.4. Documentation des modules](#114-documentation-des-modules)
+  - [1.2. Ansible](#12-ansible)
+    - [1.2.1. IP des membres du cluster de serveurs (AWS EC2):](#121-ip-des-membres-du-cluster-de-serveurs-aws-ec2)
+    - [1.2.2. IP des autres serveurs (AWS EC2):](#122-ip-des-autres-serveurs-aws-ec2)
+    - [1.2.3. Architecture code ansible](#123-architecture-code-ansible)
+  - [1.3. Python](#13-python)
+    - [1.3.1. Architecture](#131-architecture)
+  - [1.4. Docker](#14-docker)
+    - [1.4.1. Architecture](#141-architecture)
+    - [1.4.2. Annexe](#142-annexe)
 
-## 1. Terraform
+## 1.1. Terraform
 
 Pour ce projet, nous allons utiliser **6** serveurs sur AWS.
+
+### 1.1.1. Ressources déployées
 
 - Un serveur "**dev_tools**" où une application comme  ansible tournera.
 - Un serveur "**NFS**" qui servira seulement de serveur de fichiers partagés. C'est dans cette machine que seront montés les volums dockers
@@ -25,19 +31,21 @@ Pour ce projet, nous allons utiliser **6** serveurs sur AWS.
  Pour les déployer nous utilisons terraform.
 
 Les scripts terraform vont permettre de :
+
 1. **Créer le réseau, c'est à dire:**
   - Un VPC
   - Des subnets publics et privés attachés à ce VPC
   - Une internet gateway pour connecter le VPC à internet et aux services  AWS
   - Une NAT gateway pour permettre au réseau privé de sortir sur internet
   - Des security groups adaptés aux flux qui transitent.
+  
 2. **Les 4 EC2 qui feront partis de notre cluster swarm.**
 
 3. Obtenir les outputs des EC2 et des différents subnet qui seront utiles pour Ansible par la suite. Notamment pour les playbooks.
 
 4. Une fois le réseau et les EC2 déployés, le playbook ansible (voir ci après) va se lancer automatiquement à la création, grâce au user-data
 
-### Architecture code terraform
+### 1.1.2. Architecture code terraform
 ``` bash
 .
 |-- modules
@@ -64,22 +72,34 @@ Les scripts terraform vont permettre de :
 
 5 directories, 16 files
 ```
+### 1.1.3. Fonctionnement
 
+#### 1.1.3.1. Les modules
+Ce projet comporte deux modules écris afin de pouvoir les réutiliser dans n'importe quel environnement.
+Le premier module Networking permet de déployer toute l'infrastructure réseau (VPC, Subnets, route table, etc...) tandis que le second module Multiple_EC2 permet le déploiement de X instances selon la demande avec tous les paramètres nécessaires à un bon fonctionnement de ces dernières.
+
+2. L'appel aux modules
+
+Pour finalement déployer toute l'infrastructure, il faut faire appel aux modules avec les variables que ces derniers attendent (certaines sont obligatoires, d'autres non.) L'appel à ces modules se fait dans ce projet, dans le dossier **production-env** dans le fichier **main.tf** qui contient en plus de l'appel des modules, d'autres créations de ressources (Deux autres EC2, NAS et Dev_tools + des EIP)
+
+3. Automatisation avec Ansible.
+
+### 1.1.4. Documentation des modules
 
 **Pour voir les ressources déployées du réseau ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Networkings (Readme autogénéré via terraform-docs)**
 
 **Pour voir les ressources EC2 deployées ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Multiple_EC2 (Readme autogénéré via terraform-docs)**
-## 2. Ansible
+## 1.2. Ansible
 Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker compose ansi que l'initialisation de docker swarm (managers + workers) sur notre flotte de serveurs. Ansible nous sera également utile pour joindre X workers à notre docker swarm en déployant le token sur toutes les machines nécessaires.
 
-### IP des membres du cluster de serveurs (AWS EC2):
+### 1.2.1. IP des membres du cluster de serveurs (AWS EC2):
  - VM01 (MANAGER) => @IP privé : `10.150.2.10`  ; @ip public : `3.215.3.153`
    - VM01 (MANGAGER) a une EIP pour plus de facilité
  - VM02 (WORKER)  => @IP privé : `10.150.2.11`
  - VM03 (WORKER)  => @IP privé : `10.150.2.12`
  - VM04 (WORKER)  => @IP privé : `10.150.2.13`
 
-### IP des autres serveurs (AWS EC2):
+### 1.2.2. IP des autres serveurs (AWS EC2):
 - Dev_Tools => @ip privé: `10.150.2.14` ; @ip public : `52.86.150.152`
   - Dev_Tools a une EIP pour plus de facilité
 - NAS =>  @ip privé: `10.150.2.15`
@@ -99,7 +119,7 @@ Les noms attribués seront  utilisés dans l'inventory d'ansible
 
 Le code source Ansible se trouve dans le dossier Ansible.
 
-### Architecture code ansible
+### 1.2.3. Architecture code ansible
 ```bash
 .
 |-- ansible.cfg
@@ -139,13 +159,13 @@ Le code source Ansible se trouve dans le dossier Ansible.
 
 **À ce stade là et en une seule commande, l'infrastructure réseau ainsi que tous les serveurs sont déployés et sont en cluster swarm.**
 
-## 3. Python
+## 1.3. Python
 
 Nous utilisons python pour deux choses :
 1. Pour fetch l'API du grand lyon est obtenir un jeu de données en json (des velov de Lyon) puis pour publish à notre broker Mosquitto
 2. Pour subscribe à notre broker Mosquitto et parser le jeu de donnée selon ce que l'on souhaite garder + la mise en forme que l'on souhaite et pour finir : Envoyer ces données à notre BDD influxDB sur lequel un grafana sera greffé
 
-### Architecture
+### 1.3.1. Architecture
 
 ```bash
 └── python
@@ -159,7 +179,7 @@ Nous utilisons python pour deux choses :
 ```
 
 
-## 4. Docker
+## 1.4. Docker
 
 Concernant docker, nous avons donc un cluster swarm de 4 membres (1 manager, 3 workers).
 
@@ -185,7 +205,7 @@ Au final une seule commande `docker stack deploy -c docker-compose.yaml nom_stac
 - http://3.215.3.153:8086 (influxdb)
 
 
-### Architecture
+### 1.4.1. Architecture
 
 
 ```bash
@@ -246,7 +266,7 @@ Au final une seule commande `docker stack deploy -c docker-compose.yaml nom_stac
 
 ```
 
-### Annexe
+### 1.4.2. Annexe
 1. **Architecture complète**
 
 ![](https://user-images.githubusercontent.com/84475677/197494138-7ba8a690-d897-4ec1-bdb8-ca15f656482c.jpg)

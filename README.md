@@ -226,8 +226,13 @@ Au final une seule commande `docker stack deploy -c docker-compose.yaml nom_stac
 ```
 
 ### Annexe
+1. Architecture complète
 
-1. Docker Vizualiser
+![](https://user-images.githubusercontent.com/84475677/197494138-7ba8a690-d897-4ec1-bdb8-ca15f656482c.jpg)
+
+
+
+2. Docker Vizualiser
 
 ![Viz](https://user-images.githubusercontent.com/84475677/197485836-61c798a3-4b65-46e0-9622-2aee8402bf79.png)
 

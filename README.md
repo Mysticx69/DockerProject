@@ -1,5 +1,18 @@
 # DockerProject
 
+- [DockerProject](#dockerproject)
+  - [1. Terraform](#1-terraform)
+    - [Architecture code terraform](#architecture-code-terraform)
+  - [2. Ansible](#2-ansible)
+    - [IP des membres du cluster de serveurs (AWS EC2):](#ip-des-membres-du-cluster-de-serveurs-aws-ec2)
+    - [IP des autres serveurs (AWS EC2):](#ip-des-autres-serveurs-aws-ec2)
+    - [Architecture code ansible](#architecture-code-ansible)
+  - [3. Python](#3-python)
+    - [Architecture](#architecture)
+  - [4. Docker](#4-docker)
+    - [Architecture](#architecture-1)
+    - [Annexe](#annexe)
+
 ## 1. Terraform
 
 Pour ce projet, nous allons utiliser **6** serveurs sur AWS.
@@ -60,7 +73,8 @@ Les scripts terraform vont permettre de :
 Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker compose ansi que l'initialisation de docker swarm (managers + workers) sur notre flotte de serveurs. Ansible nous sera également utile pour joindre X workers à notre docker swarm en déployant le token sur toutes les machines nécessaires.
 
 ### IP des membres du cluster de serveurs (AWS EC2):
- - VM01 (MANAGER) => @IP privé : `10.150.2.10`
+ - VM01 (MANAGER) => @IP privé : `10.150.2.10`  ; @ip public : `3.215.3.153`
+   - VM01 (MANGAGER) a une EIP pour plus de facilité
  - VM02 (WORKER)  => @IP privé : `10.150.2.11`
  - VM03 (WORKER)  => @IP privé : `10.150.2.12`
  - VM04 (WORKER)  => @IP privé : `10.150.2.13`

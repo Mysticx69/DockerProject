@@ -1,64 +1,69 @@
+
 """
-Parse data
-@author: tblanchefort
+Subscribe to MQTT topic : /data
+@author: asterna, tblanchefort
 """
-
-import json
-from datetime import datetime
-from influxdb_client import InfluxDBClient
-from influxdb_client.client.write_api import SYNCHRONOUS
-import paho.mqtt.client as mqtt
-
-######################For MQTT#########################
-host_ip = '10.150.2.10'
-port = 1883
-keepalive = 60
-topic = '/data'
-
 #####################For INFLUXDB#######################
 token = "5up3r-S3cr3t-auth-t0k3n"
 org = "influxdata-org"
 bucket = "default"
-url = "http://localhost:8086"
+url = "http://10.150.2.10:8086"
+
+#####Import#####
+
+import paho.mqtt.client as mqtt
+import json
+from datetime import datetime
+from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client.client.write_api import SYNCHRONOUS
+
+#####Initialize the Client###########
+
+# You can generate an API token from the "API Tokens Tab" in the UI
+token = "5up3r-S3cr3t-auth-t0k3n"
+org = "influxdata-org"
+bucket = "default"
+
+#!/usr/bin/env python3
+
+
+
+#Variables
+BROKERIP = '10.150.2.10'
+BROKERPORT = 1883
 
 
 def on_connect(client, userdata, flags, rc):
-    print("Connected with result code " + str(rc))
+    """Coonect to broker and subscribe to /data topic"""
+    # This will be called once the client connects
+    print(f"Connected with result code {rc}")
+    # Subscribe here!
     client.subscribe("/data")
 
-
-def on_message(client, userdata, msg):
-
-    msg_json = json.loads(msg.payload.decode())
+def parser(msg):
     json_payload = []
-    velov = "Velov"
-    addr = (msg_json.get('Adresse'))
-    commune = msg_json.get('Commune')
-    capacite_totale = msg_json.get('Capacite')
-    velo_dispo = msg_json.get('Velo dispo')
 
     data = {
-        "_measurement": velov,
-        "_time": datetime.now(),
-        "_fields": {
-            "Velo dispo": velo_dispo,
-            "Adresse": addr,
-            "Commune": commune,
-            "test": 1,
-            "Capacite": capacite_totale
-        }
+        "measurement": "velov",
+        "time": datetime.now(),
+        "fields": msg
     }
     json_payload.append(data)
+    return json_payload 
+
+def on_message(client, userdata, msg):
+    """print msg when payload received"""
+    reponse = json.loads(str(msg.payload.decode()))
+    reponse = parser(reponse)
+    print(f"Message received {reponse}")
 
     with InfluxDBClient(url=url, token=token, org=org) as client:
         write_api = client.write_api(write_options=SYNCHRONOUS)
-
-        print(type(data))
-        write_api.write(bucket, data)
+        write_api.write(bucket, org, reponse)
 
 
-client = mqtt.Client()
-client.connect(host_ip, port, keepalive)
+client = mqtt.Client("mqtt_sub")  # client ID "mqtt-test"
 client.on_connect = on_connect
 client.on_message = on_message
-client.loop_forever()
+client.connect(BROKERIP, BROKERPORT)
+client.loop_forever()  # Start networking daemon

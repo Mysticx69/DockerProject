@@ -133,7 +133,16 @@ Nous utilisons python pour deux choses :
 
 ### Architecture
 
-![python archi](https://user-images.githubusercontent.com/84475677/197483192-6a7e721c-c140-4ea7-9c3f-4252b720f1ca.png)
+```bash
+└── python
+    └── scripts
+        ├── fetch.py
+        ├── parse.py
+        ├── pubclient1.py
+        └── subscribe.py
+
+22 directories, 29 files
+```
 
 
 ## 4. Docker
@@ -157,10 +166,68 @@ Au final une seule commande `docker stack deploy -c docker-compose.yaml nom_stac
 
 ### Architecture
 
-![architecture complète](https://user-images.githubusercontent.com/84475677/197485515-fc71bc7d-0e45-456c-aca8-d3a2c7fe084a.png)
+
+```bash
+.
+├── docker-compose.yaml
+├── dockerfiles
+│   ├── publish
+│   │   ├── Dockerfile
+│   │   ├── mosquitto
+│   │   │   └── config
+│   │   │       └── mosquitto.conf
+│   │   ├── python
+│   │   │   └── scripts
+│   │   │       ├── fetch.py
+│   │   │       ├── parse.py
+│   │   │       ├── pubclient1.py
+│   │   │       └── subscribe.py
+│   │   └── requirements.txt
+│   └── subscribe
+│       ├── Dockerfile
+│       ├── mosquitto
+│       │   └── config
+│       │       └── mosquitto.conf
+│       ├── python
+│       │   └── scripts
+│       │       ├── fetch.py
+│       │       ├── parse.py
+│       │       ├── pubclient1.py
+│       │       ├── sub.py
+│       │       ├── subscribe.py
+│       │       └── subscribe_influxdb.py
+│       └── requirements.txt
+├── grafana
+│   └── etc
+│       ├── grafana.ini
+│       └── provisioning
+│           ├── dashboards
+│           ├── datasources
+│           │   ├── datasource.yaml
+│           │   └── datasource.yaml.template
+│           └── notifiers
+├── grafana.env
+├── influx2.env
+├── mosquitto
+│   ├── config
+│   │   └── mosquitto.conf
+│   └── log
+│       └── mosquitto.log
+├── provision.sh
+└── python
+    └── scripts
+        ├── fetch.py
+        ├── parse.py
+        ├── pubclient1.py
+        └── subscribe.py
+
+22 directories, 29 files
+
+```
 
 ### Annexe
 
 1. Docker Vizualiser
 
 ![Viz](https://user-images.githubusercontent.com/84475677/197485836-61c798a3-4b65-46e0-9622-2aee8402bf79.png)
+

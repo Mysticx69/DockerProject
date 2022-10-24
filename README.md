@@ -165,10 +165,10 @@ Un volume NFS a également été monté sur un serveur NAS distant.
 Au final une seule commande `docker stack deploy -c docker-compose.yaml nom_stack` permet de déployer tous nos services docker dans une stack gérée par swarm
 
 **Une EIP est présente dans AWS sur notre node manager: `3.215.3.153`. C'est cette IP public qu'il faut utiliser pour accéder à n'importe quel service déployé.**
+- https://3.215.3.153:9443 (portainer.io)
 - http://3.215.3.153:8080 (visualizer)
 - http://3.215.3.153:3000 (Grafana)
 - http://3.215.3.153:8086 (influxdb)
-- http://3.215.3.153:9143 (portainer.io)
 
 
 ### Architecture

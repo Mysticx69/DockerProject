@@ -243,7 +243,7 @@ Au final une seule commande `docker stack deploy -c docker-compose.yaml nom_stac
 
 ![cluster](https://user-images.githubusercontent.com/84475677/197570809-96bf537b-222d-48dd-8ec9-fa586fa6102d.PNG)
 
-3. **Docker Vizualiszer**
+3. **Docker Vizualiszer (sans replicas)**
 
 ![Viz](https://user-images.githubusercontent.com/84475677/197485836-61c798a3-4b65-46e0-9622-2aee8402bf79.png)
 

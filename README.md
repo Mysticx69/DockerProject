@@ -131,5 +131,36 @@ Nous utilisons python pour deux choses :
 1. Pour fetch l'API du grand lyon est obtenir un jeu de données en json (des velov de Lyon) puis pour publish à notre broker Mosquitto
 2. Pour subscribe à notre broker Mosquitto et parser le jeu de donnée selon ce que l'on souhaite garder + la mise en forme que l'on souhaite et pour finir : Envoyer ces données à notre BDD influxDB sur lequel un grafana sera greffé
 
+### Architecture
+
+![python archi](https://user-images.githubusercontent.com/84475677/197483192-6a7e721c-c140-4ea7-9c3f-4252b720f1ca.png)
 
 
+## 4. Docker
+
+Concernant docker, nous avons donc un cluster swarm de 4 membres (1 manager, 3 workers).
+
+Nous avons créé un docker compose qui déploie tous les services dans une stack, géré par le swarm.
+
+**Les services:**
+
+- BrokerMQTT (Mosquitto)
+- publishMQTT (qui fetch l'api du grand lyon et publie sur brokerMQTT => topic = DATA)
+- subscribeMQTT (qui souscris au brokerMQTT sur le même topic)
+- Une BDD influxDB qui recevra les données (station velov)
+- Un grafana pour visualiser les données
+- Un visualizer swarm
+
+Un volume NFS a également été monté sur un serveur NAS distant.
+
+Au final une seule commande `docker stack deploy -c docker-compose.yaml nom_stack` permet de déployer tous nos services docker dans une stack gérée par swarm
+
+### Architecture
+
+![architecture complète](https://user-images.githubusercontent.com/84475677/197485515-fc71bc7d-0e45-456c-aca8-d3a2c7fe084a.png)
+
+### Annexe
+
+1. Docker Vizualiser
+
+![Viz](https://user-images.githubusercontent.com/84475677/197485836-61c798a3-4b65-46e0-9622-2aee8402bf79.png)

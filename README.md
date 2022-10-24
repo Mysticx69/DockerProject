@@ -6,6 +6,8 @@
     - [1.1.2. Architecture code terraform](#112-architecture-code-terraform)
     - [1.1.3. Fonctionnement](#113-fonctionnement)
       - [1.1.3.1. Les modules](#1131-les-modules)
+      - [1.1.3.2. L'appel aux modules](#1132-lappel-aux-modules)
+      - [1.1.3.3. Automatisation avec Ansible](#1133-automatisation-avec-ansible)
     - [1.1.4. Documentation des modules](#114-documentation-des-modules)
   - [1.2. Ansible](#12-ansible)
     - [1.2.1. IP des membres du cluster de serveurs (AWS EC2):](#121-ip-des-membres-du-cluster-de-serveurs-aws-ec2)
@@ -24,7 +26,7 @@ Pour ce projet, nous allons utiliser **6** serveurs sur AWS.
 ### 1.1.1. Ressources déployées
 
 - Un serveur "**dev_tools**" où une application comme  ansible tournera.
-- Un serveur "**NFS**" qui servira seulement de serveur de fichiers partagés. C'est dans cette machine que seront montés les volums dockers
+- Un serveur "**NFS**" qui servira seulement de serveur de fichiers partagés. C'est dans cette machine que seront montés les volumes dockers
 - 4 serveurs qui hébergeront l'infrastructure docker et qui seront géres par docker Swarm
   -  1 **Manager** et 3 **workers**. Il sera spécifié dans le manager de ne pas gérer de service mais de seulement s'occuper de son rôle principal : le management des workers.
 
@@ -78,17 +80,19 @@ Les scripts terraform vont permettre de :
 Ce projet comporte deux modules écris afin de pouvoir les réutiliser dans n'importe quel environnement.
 Le premier module Networking permet de déployer toute l'infrastructure réseau (VPC, Subnets, route table, etc...) tandis que le second module Multiple_EC2 permet le déploiement de X instances selon la demande avec tous les paramètres nécessaires à un bon fonctionnement de ces dernières.
 
-2. L'appel aux modules
+#### 1.1.3.2. L'appel aux modules
 
 Pour finalement déployer toute l'infrastructure, il faut faire appel aux modules avec les variables que ces derniers attendent (certaines sont obligatoires, d'autres non.) L'appel à ces modules se fait dans ce projet, dans le dossier **production-env** dans le fichier **main.tf** qui contient en plus de l'appel des modules, d'autres créations de ressources (Deux autres EC2, NAS et Dev_tools + des EIP)
 
-3. Automatisation avec Ansible.
+#### 1.1.3.3. Automatisation avec Ansible
+
+La machine dev_tools créée dans le fichier **main.tf** du dossier **production-env** a des provisioners attachés afin de pouvoir copier, mettre en place l'environnement et executer le code ansible (vu dans la prochaine section) via un script.
 
 ### 1.1.4. Documentation des modules
 
-**Pour voir les ressources déployées du réseau ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Networkings (Readme autogénéré via terraform-docs)**
+**Pour voir les ressources déployées du réseau ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Networkings (Readme autogénéré via terraform-docs dans .pre-commit.yaml)**
 
-**Pour voir les ressources EC2 deployées ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Multiple_EC2 (Readme autogénéré via terraform-docs)**
+**Pour voir les ressources EC2 deployées ainsi que les inputs et outputs, CF README.MD dans le dossier terraform/modules/Multiple_EC2 (Readme autogénéré via terraform-docs .pre-commit.yaml)**
 ## 1.2. Ansible
 Nous utilisons Ansible pour déployer tous les pré-requis, docker et docker compose ansi que l'initialisation de docker swarm (managers + workers) sur notre flotte de serveurs. Ansible nous sera également utile pour joindre X workers à notre docker swarm en déployant le token sur toutes les machines nécessaires.
 

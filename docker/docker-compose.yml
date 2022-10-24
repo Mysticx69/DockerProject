@@ -15,6 +15,7 @@ services:
           - "node.role==manager"
       restart_policy:
         condition: on-failure
+      replicas: 2
 
   publishMQTT:
     image: 127.0.0.1:5000/publishmqtt:latest
@@ -55,8 +56,8 @@ services:
       - ./influx2.env
     ports:
       - 8086:8086
-    restart: always
-    privileged: true
+    deploy:
+      replicas: 2
 
   grafana:
     user: "0"
@@ -72,8 +73,8 @@ services:
       - 3000:3000
     depends_on:
       - influxdb
-    restart: always
-    privileged: true
+    deploy:
+      replicas: 2
 
 volumes:
   influxdb-lib:

@@ -236,4 +236,3 @@ Au final une seule commande `docker stack deploy -c docker-compose.yaml nom_stac
 
 ![Viz](https://user-images.githubusercontent.com/84475677/197485836-61c798a3-4b65-46e0-9622-2aee8402bf79.png)
 
-test
